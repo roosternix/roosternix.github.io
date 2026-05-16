@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Links — YOUR NAME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<div class="page">
+  <a class="back-btn" href="index.html">◀ BACK TO MENU</a>
+
+  <div class="page-header">
+    <div class="page-icon">🔗</div>
+    <div class="page-title-wrap">
+      <span class="page-num">01 / LINKS</span>
+      <h1 class="page-title">FIND ME ONLINE</h1>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <div class="section-label">SOCIAL & PROFILES</div>
+
+    <!-- Edit these links with your real URLs -->
+    <a class="item-row" href="https://github.com/yourusername" target="_blank" rel="noopener">
+      <span class="item-icon">GH</span>
+      <span class="item-label">
+        GitHub
+        <span class="item-sub">github.com/yourusername</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+
+    <a class="item-row" href="https://twitter.com/yourusername" target="_blank" rel="noopener">
+      <span class="item-icon">TW</span>
+      <span class="item-label">
+        Twitter / X
+        <span class="item-sub">@yourusername</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+
+    <a class="item-row" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">
+      <span class="item-icon">LI</span>
+      <span class="item-label">
+        LinkedIn
+        <span class="item-sub">linkedin.com/in/yourusername</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+
+    <a class="item-row" href="https://instagram.com/yourusername" target="_blank" rel="noopener">
+      <span class="item-icon">IG</span>
+      <span class="item-label">
+        Instagram
+        <span class="item-sub">@yourusername</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+
+    <a class="item-row" href="https://youtube.com/@yourusername" target="_blank" rel="noopener">
+      <span class="item-icon">YT</span>
+      <span class="item-label">
+        YouTube
+        <span class="item-sub">youtube.com/@yourusername</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+  </div>
+
+  <div class="content-box">
+    <div class="section-label">CONTACT</div>
+
+    <a class="item-row" href="mailto:you@email.com">
+      <span class="item-icon">@</span>
+      <span class="item-label">
+        Email
+        <span class="item-sub">you@email.com</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*3}s;`;
+    starsEl.appendChild(s);
+  }
+</script>
+</body>
+</html>

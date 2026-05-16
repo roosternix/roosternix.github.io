@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate — YOUR NAME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<div class="page">
+  <a class="back-btn" href="index.html">◀ BACK TO MENU</a>
+
+  <div class="page-header">
+    <div class="page-icon">💰</div>
+    <div class="page-title-wrap">
+      <span class="page-num">04 / DONATE</span>
+      <h1 class="page-title">SUPPORT MY WORK</h1>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <div class="section-label">WHY DONATE?</div>
+    <p class="body-text">
+      If my work has helped you or you just want to show support, a donation goes a long way. It helps me keep building free, open stuff for everyone.
+    </p>
+    <br>
+    <p class="body-text" style="color: var(--text-dim);">
+      Every contribution, big or small, is genuinely appreciated.
+    </p>
+  </div>
+
+  <div class="content-box">
+    <div class="section-label">CHOOSE YOUR PLATFORM</div>
+
+    <!-- Replace href values with your real donation links -->
+    <a class="donate-btn" href="https://ko-fi.com/yourusername" target="_blank" rel="noopener">
+      ☕ BUY ME A COFFEE (KO-FI)
+    </a>
+
+    <a class="donate-btn" href="https://github.com/sponsors/yourusername" target="_blank" rel="noopener">
+      ★ GITHUB SPONSORS
+    </a>
+
+    <a class="donate-btn" href="https://paypal.me/yourusername" target="_blank" rel="noopener">
+      ◈ PAYPAL
+    </a>
+  </div>
+
+  <div class="content-box">
+    <div class="section-label">OTHER WAYS TO HELP</div>
+    <p class="body-text" style="color: var(--text-dim); font-size: 14px; line-height: 1.9;">
+      ★ Star my repos on GitHub<br>
+      ★ Share my work with others<br>
+      ★ Leave feedback or open issues<br>
+      ★ Follow me on social media
+    </p>
+  </div>
+
+  <div style="text-align: center; margin-top: 1.5rem;">
+    <p style="font-family: 'VT323', monospace; font-size: 16px; color: var(--amber-dim); letter-spacing: 3px;">
+      THANK YOU, ADVENTURER ♥
+    </p>
+  </div>
+</div>
+
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*3}s;`;
+    starsEl.appendChild(s);
+  }
+</script>
+</body>
+</html>

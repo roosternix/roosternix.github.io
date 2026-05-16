@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — YOUR NAME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* About-specific styles */
+  .char-sheet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .char-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+  }
+  .char-key {
+    font-size: 7px;
+    color: var(--amber-dim);
+    letter-spacing: 3px;
+  }
+  .char-val {
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    color: var(--text);
+    letter-spacing: 1px;
+  }
+
+  /* XP bar */
+  .xp-section { margin-bottom: 1.5rem; }
+  .xp-item { margin-bottom: 14px; }
+  .xp-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 8px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+  .xp-bar {
+    height: 8px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .xp-fill {
+    height: 100%;
+    background: var(--amber);
+    box-shadow: 0 0 8px rgba(245,166,35,0.6);
+    animation: grow 1.2s cubic-bezier(0.2,0,0.4,1) forwards;
+    transform-origin: left;
+  }
+  @keyframes grow { from { width: 0 !important; } }
+
+  @media (max-width: 480px) {
+    .char-sheet { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<div class="page">
+  <a class="back-btn" href="index.html">◀ BACK TO MENU</a>
+
+  <div class="page-header">
+    <div class="page-icon">👾</div>
+    <div class="page-title-wrap">
+      <span class="page-num">03 / ABOUT ME</span>
+      <h1 class="page-title">CHARACTER INFO</h1>
+    </div>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <span class="stat-value">??</span>
+      <span class="stat-label">YEARS XP</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">??</span>
+      <span class="stat-label">PROJECTS</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">??</span>
+      <span class="stat-label">CUPS OF COFFEE</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">100</span>
+      <span class="stat-label">PASSION %</span>
+    </div>
+  </div>
+
+  <!-- CHARACTER SHEET -->
+  <div class="content-box">
+    <div class="section-label">CHARACTER SHEET</div>
+    <div class="char-sheet">
+      <div class="char-row">
+        <span class="char-key">NAME</span>
+        <span class="char-val">Your Name Here</span>
+      </div>
+      <div class="char-row">
+        <span class="char-key">CLASS</span>
+        <span class="char-val">Developer / Designer</span>
+      </div>
+      <div class="char-row">
+        <span class="char-key">LOCATION</span>
+        <span class="char-val">Your City, Country</span>
+      </div>
+      <div class="char-row">
+        <span class="char-key">STATUS</span>
+        <span class="char-val" style="color: var(--green); text-shadow: 0 0 8px rgba(57,255,20,0.6);">Available</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIO -->
+  <div class="content-box">
+    <div class="section-label">LORE</div>
+    <p class="body-text">
+      Write your bio here. Tell people who you are, what you do, and what you care about. Keep it human and interesting — this is your chance to make a real impression.
+    </p>
+    <br>
+    <p class="body-text">
+      Add a second paragraph about your background, interests, or what you're currently working on.
+    </p>
+  </div>
+
+  <!-- SKILLS XP BARS -->
+  <div class="content-box xp-section">
+    <div class="section-label">SKILLS</div>
+
+    <!-- Edit skill name and width (0–100%) to match your real skills -->
+    <div class="xp-item">
+      <div class="xp-label"><span>SKILL ONE</span><span>LVL 8</span></div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 80%;"></div></div>
+    </div>
+    <div class="xp-item">
+      <div class="xp-label"><span>SKILL TWO</span><span>LVL 7</span></div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 70%;"></div></div>
+    </div>
+    <div class="xp-item">
+      <div class="xp-label"><span>SKILL THREE</span><span>LVL 9</span></div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 90%;"></div></div>
+    </div>
+    <div class="xp-item">
+      <div class="xp-label"><span>SKILL FOUR</span><span>LVL 6</span></div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 60%;"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*3}s;`;
+    starsEl.appendChild(s);
+  }
+</script>
+</body>
+</html>

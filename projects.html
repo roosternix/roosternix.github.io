@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — YOUR NAME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<div class="page">
+  <a class="back-btn" href="index.html">◀ BACK TO MENU</a>
+
+  <div class="page-header">
+    <div class="page-icon">⚗️</div>
+    <div class="page-title-wrap">
+      <span class="page-num">02 / PROJECTS</span>
+      <h1 class="page-title">MY WORK</h1>
+    </div>
+  </div>
+
+  <!-- PROJECT CARDS — duplicate and edit these for each project -->
+
+  <div class="content-box">
+    <div class="section-label">FEATURED PROJECTS</div>
+
+    <a class="item-row" href="https://github.com/yourusername/project-one" target="_blank" rel="noopener">
+      <span class="item-icon">01</span>
+      <span class="item-label">
+        Project Name One
+        <span class="item-sub">A short description of what this project does</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+
+    <a class="item-row" href="https://github.com/yourusername/project-two" target="_blank" rel="noopener">
+      <span class="item-icon">02</span>
+      <span class="item-label">
+        Project Name Two
+        <span class="item-sub">Another cool thing you built</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+
+    <a class="item-row" href="https://github.com/yourusername/project-three" target="_blank" rel="noopener">
+      <span class="item-icon">03</span>
+      <span class="item-label">
+        Project Name Three
+        <span class="item-sub">What makes it interesting or useful</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+
+    <a class="item-row" href="https://github.com/yourusername/project-four" target="_blank" rel="noopener">
+      <span class="item-icon">04</span>
+      <span class="item-label">
+        Project Name Four
+        <span class="item-sub">Technologies used or problem solved</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+  </div>
+
+  <div class="content-box">
+    <div class="section-label">ALL REPOS</div>
+    <a class="item-row" href="https://github.com/yourusername?tab=repositories" target="_blank" rel="noopener">
+      <span class="item-icon">★</span>
+      <span class="item-label">
+        View all on GitHub
+        <span class="item-sub">github.com/yourusername</span>
+      </span>
+      <span class="item-arrow">»</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*3}s;`;
+    starsEl.appendChild(s);
+  }
+</script>
+</body>
+</html>
