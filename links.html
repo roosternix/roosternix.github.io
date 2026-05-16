@@ -1,99 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Links — YOUR NAME</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LINKS — ROOSTERNIX</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hud.css">
 </head>
 <body>
-<div class="stars" id="stars"></div>
+<div class="grid-bg"></div>
+<div class="hud-screen">
 
-<div class="page">
-  <a class="back-btn" href="index.html">◀ BACK TO MENU</a>
-
-  <div class="page-header">
-    <div class="page-icon">🔗</div>
-    <div class="page-title-wrap">
-      <span class="page-num">01 / LINKS</span>
-      <h1 class="page-title">FIND ME ONLINE</h1>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a class="back-btn" href="index.html">◀ MENU</a>
+    <span class="top-title">// LINKS — NETWORK NODE</span>
+    <div class="top-right">
+      <span class="top-status">● ONLINE</span>
+      <span id="clk">--:--:--</span>
+      <span>roosternix.github.io</span>
     </div>
   </div>
 
-  <div class="content-box">
-    <div class="section-label">SOCIAL & PROFILES</div>
-
-    <!-- Edit these links with your real URLs -->
-    <a class="item-row" href="https://github.com/yourusername" target="_blank" rel="noopener">
-      <span class="item-icon">GH</span>
-      <span class="item-label">
-        GitHub
-        <span class="item-sub">github.com/yourusername</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
-
-    <a class="item-row" href="https://twitter.com/yourusername" target="_blank" rel="noopener">
-      <span class="item-icon">TW</span>
-      <span class="item-label">
-        Twitter / X
-        <span class="item-sub">@yourusername</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
-
-    <a class="item-row" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">
-      <span class="item-icon">LI</span>
-      <span class="item-label">
-        LinkedIn
-        <span class="item-sub">linkedin.com/in/yourusername</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
-
-    <a class="item-row" href="https://instagram.com/yourusername" target="_blank" rel="noopener">
-      <span class="item-icon">IG</span>
-      <span class="item-label">
-        Instagram
-        <span class="item-sub">@yourusername</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
-
-    <a class="item-row" href="https://youtube.com/@yourusername" target="_blank" rel="noopener">
-      <span class="item-icon">YT</span>
-      <span class="item-label">
-        YouTube
-        <span class="item-sub">youtube.com/@yourusername</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-label">NAVIGATION</div>
+    <a class="nav-item active" href="links.html"><span class="nav-dot"></span>LINKS</a>
+    <a class="nav-item" href="projects.html"><span class="nav-dot"></span>PROJECTS</a>
+    <a class="nav-item" href="about.html"><span class="nav-dot"></span>ABOUT</a>
+    <a class="nav-item" href="donate.html"><span class="nav-dot"></span>DONATE</a>
+    <div class="sidebar-bottom">
+      SYS STATUS<div class="bar-wrap"><div class="bar-fill"></div></div>
+    </div>
   </div>
 
-  <div class="content-box">
-    <div class="section-label">CONTACT</div>
-
-    <a class="item-row" href="mailto:you@email.com">
-      <span class="item-icon">@</span>
-      <span class="item-label">
-        Email
-        <span class="item-sub">you@email.com</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
+  <!-- MAIN -->
+  <div class="main">
+    <div class="c-section">
+      <div class="c-head">SOCIAL PROFILES</div>
+      <a class="c-row" href="https://github.com/roosternix" target="_blank" rel="noopener">
+        <span class="c-icon">GH</span>
+        <span style="flex:1">GitHub<span class="c-sub">github.com/roosternix</span></span>
+        <span class="c-arr">»</span>
+      </a>
+      <a class="c-row" href="https://twitter.com/roosternix" target="_blank" rel="noopener">
+        <span class="c-icon">TW</span>
+        <span style="flex:1">Twitter / X<span class="c-sub">@roosternix</span></span>
+        <span class="c-arr">»</span>
+      </a>
+      <a class="c-row" href="https://linkedin.com/in/roosternix" target="_blank" rel="noopener">
+        <span class="c-icon">LI</span>
+        <span style="flex:1">LinkedIn<span class="c-sub">linkedin.com/in/roosternix</span></span>
+        <span class="c-arr">»</span>
+      </a>
+      <a class="c-row" href="https://instagram.com/roosternix" target="_blank" rel="noopener">
+        <span class="c-icon">IG</span>
+        <span style="flex:1">Instagram<span class="c-sub">@roosternix</span></span>
+        <span class="c-arr">»</span>
+      </a>
+      <a class="c-row" href="https://youtube.com/@roosternix" target="_blank" rel="noopener">
+        <span class="c-icon">YT</span>
+        <span style="flex:1">YouTube<span class="c-sub">youtube.com/@roosternix</span></span>
+        <span class="c-arr">»</span>
+      </a>
+    </div>
+    <div class="c-section">
+      <div class="c-head">DIRECT CONTACT</div>
+      <a class="c-row" href="mailto:you@email.com">
+        <span class="c-icon">@</span>
+        <span style="flex:1">Email<span class="c-sub">you@email.com</span></span>
+        <span class="c-arr">»</span>
+      </a>
+    </div>
   </div>
+
+  <!-- RIGHT -->
+  <div class="right-panel">
+    <div class="rp-block"><div class="rp-label">NODE</div><div class="rp-val">01 / 04</div></div>
+    <div class="rp-divider"></div>
+    <div class="rp-block"><div class="rp-label">LINKS</div><div class="rp-val">06</div></div>
+    <div class="rp-divider"></div>
+    <div class="rp-block"><div class="rp-label">STATUS</div><div class="rp-val blink">LIVE_</div></div>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="bot-bar">
+    <span>01 // LINKS</span>
+    <div class="ticker"><div class="ticker-inner">// ROOSTERNIX.GITHUB.IO // NETWORK NODE ACTIVE // ALL SYSTEMS NOMINAL // AWAITING INPUT // SIGNAL STRENGTH 100% // UPTIME 99.9% //</div></div>
+    <span>SYS::OK</span>
+  </div>
+
 </div>
-
-<script>
-  const starsEl = document.getElementById('stars');
-  for (let i = 0; i < 100; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*3}s;`;
-    starsEl.appendChild(s);
-  }
-</script>
+<script>setInterval(()=>document.getElementById('clk').textContent=new Date().toTimeString().slice(0,8),1000)</script>
 </body>
 </html>

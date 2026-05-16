@@ -1,80 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Donate — YOUR NAME</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>DONATE — ROOSTERNIX</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hud.css">
+<style>
+/* Override main to center the ATM scene */
+.main{display:flex;align-items:center;justify-content:center;overflow:hidden!important;padding:1rem!important}
+
+/* ── ATM MACHINE ── */
+.atm-wrap{
+  position:relative;
+  display:flex;flex-direction:column;
+  align-items:center;
+  gap:2rem;
+  width:100%;
+  max-width:700px;
+}
+
+.atm-label{
+  font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:5px;
+  color:var(--green2);text-align:center;
+}
+
+.scene{
+  display:flex;align-items:center;justify-content:center;
+  gap:4rem;
+  width:100%;
+  flex-wrap:wrap;
+}
+
+/* ── NOTE TRAY ── */
+.note-tray{
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;color:var(--textdim);
+}
+.tray-label{margin-bottom:.4rem}
+
+/* ── DRAGGABLE NOTES ── */
+.notes-stack{position:relative;width:160px;height:80px}
+.note{
+  position:absolute;
+  width:155px;height:72px;
+  background:#f5f0d8;
+  border:1px solid #c8b870;
+  border-radius:3px;
+  cursor:grab;
+  user-select:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.6);
+  transition:box-shadow .1s;
+  font-family:'Orbitron',sans-serif;
+  z-index:30;
+}
+.note:active{cursor:grabbing;box-shadow:4px 8px 20px rgba(0,0,0,0.7),inset 0 1px 0 rgba(255,255,255,0.6);z-index:99}
+.note.dragging{z-index:99;box-shadow:6px 12px 28px rgba(0,0,0,0.8)}
+.note-amount{font-size:22px;font-weight:900;color:#2a5a1a;letter-spacing:2px;line-height:1}
+.note-text{font-size:7px;letter-spacing:3px;color:#5a7a3a;text-align:center}
+.note-lines{position:absolute;top:8px;left:10px;right:10px;bottom:8px;pointer-events:none}
+.note-line{height:1px;background:rgba(180,160,80,0.25);margin-bottom:9px}
+
+/* stacked notes behind */
+.note.behind1{transform:rotate(-3deg) translate(3px,3px);z-index:28;cursor:default;pointer-events:none}
+.note.behind2{transform:rotate(2deg) translate(-2px,5px);z-index:27;cursor:default;pointer-events:none;background:#f0ecc8}
+
+/* ── ATM ── */
+.atm{
+  position:relative;
+  width:200px;
+  background:linear-gradient(180deg,#1a1f1a 0%,#0d120d 60%,#0a0f0a 100%);
+  border:2px solid var(--green3);
+  border-radius:8px 8px 4px 4px;
+  box-shadow:0 0 40px rgba(125,255,79,0.1),0 0 0 1px rgba(125,255,79,0.05),inset 0 1px 0 rgba(255,255,255,0.04);
+  padding:16px 14px 20px;
+  display:flex;flex-direction:column;gap:10px;
+  font-family:'Orbitron',sans-serif;
+}
+/* ATM top logo bar */
+.atm-brand{
+  text-align:center;font-size:8px;letter-spacing:4px;
+  color:var(--green2);text-shadow:0 0 8px var(--glow);
+  border-bottom:1px solid var(--green3);padding-bottom:8px;
+}
+/* ATM screen */
+.atm-screen{
+  background:#000d00;border:1px solid var(--green3);
+  padding:10px 8px;text-align:center;
+  box-shadow:inset 0 0 20px rgba(0,0,0,0.8),0 0 10px rgba(125,255,79,0.05);
+  min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  position:relative;overflow:hidden;
+}
+.atm-screen::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(125,255,79,0.015) 3px,rgba(125,255,79,0.015) 4px);
+}
+.scr-line{font-size:8px;letter-spacing:3px;color:var(--textdim);position:relative;z-index:1}
+.scr-main{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--green);text-shadow:0 0 10px var(--glow);position:relative;z-index:1}
+.scr-blink{animation:bk 1s step-end infinite}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ATM SLOT — the drop target */
+.atm-slot-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.slot-label{font-size:7px;letter-spacing:4px;color:var(--textdim)}
+.atm-slot{
+  width:130px;height:14px;
+  background:#000;
+  border:2px solid var(--green3);
+  border-radius:2px;
+  box-shadow:inset 0 2px 6px rgba(0,0,0,0.9),0 0 10px rgba(125,255,79,0.08);
+  position:relative;
+  overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.atm-slot.hover{border-color:var(--green);box-shadow:inset 0 2px 6px rgba(0,0,0,0.9),0 0 20px var(--glow)}
+.slot-glow{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(125,255,79,0.15),transparent);opacity:0;animation:slotglow 2s ease-in-out infinite}
+@keyframes slotglow{0%,100%{opacity:0;transform:translateX(-100%)}50%{opacity:1}100%{transform:translateX(100%)}}
+
+/* ATM keypad */
+.atm-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:0 10px}
+.key-btn{
+  background:rgba(125,255,79,0.06);border:1px solid var(--green3);
+  color:var(--textdim);font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:1px;
+  padding:5px 2px;text-align:center;border-radius:2px;cursor:default;
+}
+
+/* ── INSTRUCTION ── */
+.instruction{
+  text-align:center;font-family:'Orbitron',sans-serif;font-size:9px;
+  letter-spacing:4px;color:var(--textdim);
+  animation:bk 2s ease-in-out infinite;
+}
+
+/* ── SUCCESS STATE ── */
+.success-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,10,0,0.95);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+  opacity:0;pointer-events:none;transition:opacity .4s;z-index:50;
+  font-family:'Orbitron',sans-serif;
+}
+.success-overlay.show{opacity:1;pointer-events:all}
+.success-title{font-size:14px;font-weight:900;color:var(--green);text-shadow:0 0 20px var(--glow);letter-spacing:4px}
+.success-sub{font-size:8px;letter-spacing:4px;color:var(--green2)}
+.success-reset{
+  margin-top:1rem;padding:8px 20px;border:1px solid var(--green2);
+  background:transparent;color:var(--green);font-family:'Orbitron',sans-serif;
+  font-size:9px;letter-spacing:3px;cursor:pointer;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:all .15s;
+}
+.success-reset:hover{background:rgba(125,255,79,.1);text-shadow:0 0 10px var(--glow)}
+
+/* links below */
+.donate-links{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:400px}
+.d-link{
+  display:block;width:100%;padding:.8rem 1.4rem;
+  background:rgba(125,255,79,0.03);border:1px solid var(--green3);border-left:2px solid var(--green2);
+  color:var(--green);font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:4px;
+  text-align:center;text-decoration:none;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  transition:all .15s;
+}
+.d-link:hover{background:rgba(125,255,79,.08);box-shadow:0 0 20px rgba(125,255,79,.12);text-shadow:0 0 12px var(--glow);transform:translateX(4px)}
+</style>
 </head>
 <body>
-<div class="stars" id="stars"></div>
+<div class="grid-bg"></div>
+<div class="hud-screen">
 
-<div class="page">
-  <a class="back-btn" href="index.html">◀ BACK TO MENU</a>
-
-  <div class="page-header">
-    <div class="page-icon">💰</div>
-    <div class="page-title-wrap">
-      <span class="page-num">04 / DONATE</span>
-      <h1 class="page-title">SUPPORT MY WORK</h1>
+  <div class="top-bar">
+    <a class="back-btn" href="index.html">◀ MENU</a>
+    <span class="top-title">// DONATE — RESOURCE TRANSFER</span>
+    <div class="top-right">
+      <span class="top-status">● ONLINE</span>
+      <span id="clk">--:--:--</span>
+      <span>roosternix.github.io</span>
     </div>
   </div>
 
-  <div class="content-box">
-    <div class="section-label">WHY DONATE?</div>
-    <p class="body-text">
-      If my work has helped you or you just want to show support, a donation goes a long way. It helps me keep building free, open stuff for everyone.
-    </p>
-    <br>
-    <p class="body-text" style="color: var(--text-dim);">
-      Every contribution, big or small, is genuinely appreciated.
-    </p>
+  <div class="sidebar">
+    <div class="sidebar-label">NAVIGATION</div>
+    <a class="nav-item" href="links.html"><span class="nav-dot"></span>LINKS</a>
+    <a class="nav-item" href="projects.html"><span class="nav-dot"></span>PROJECTS</a>
+    <a class="nav-item" href="about.html"><span class="nav-dot"></span>ABOUT</a>
+    <a class="nav-item active" href="donate.html"><span class="nav-dot"></span>DONATE</a>
+    <div class="sidebar-bottom">SYS STATUS<div class="bar-wrap"><div class="bar-fill"></div></div></div>
   </div>
 
-  <div class="content-box">
-    <div class="section-label">CHOOSE YOUR PLATFORM</div>
+  <!-- MAIN: ATM SCENE -->
+  <div class="main">
+    <div class="atm-wrap">
+      <div class="atm-label">// INSERT NOTE INTO SLOT TO DONATE //</div>
 
-    <!-- Replace href values with your real donation links -->
-    <a class="donate-btn" href="https://ko-fi.com/yourusername" target="_blank" rel="noopener">
-      ☕ BUY ME A COFFEE (KO-FI)
-    </a>
+      <div class="scene">
+        <!-- NOTES STACK -->
+        <div class="note-tray">
+          <div class="tray-label">DRAG NOTE →</div>
+          <div class="notes-stack" id="noteStack">
+            <div class="note behind2">
+              <div class="note-lines"><div class="note-line"></div><div class="note-line"></div><div class="note-line"></div><div class="note-line"></div></div>
+              <div class="note-amount">$5</div>
+              <div class="note-text">ROOSTERNIX FUND</div>
+            </div>
+            <div class="note behind1">
+              <div class="note-lines"><div class="note-line"></div><div class="note-line"></div><div class="note-line"></div><div class="note-line"></div></div>
+              <div class="note-amount">$5</div>
+              <div class="note-text">ROOSTERNIX FUND</div>
+            </div>
+            <div class="note" id="draggableNote">
+              <div class="note-lines"><div class="note-line"></div><div class="note-line"></div><div class="note-line"></div><div class="note-line"></div></div>
+              <div class="note-amount">$5</div>
+              <div class="note-text">ROOSTERNIX FUND</div>
+            </div>
+          </div>
+        </div>
 
-    <a class="donate-btn" href="https://github.com/sponsors/yourusername" target="_blank" rel="noopener">
-      ★ GITHUB SPONSORS
-    </a>
+        <!-- ATM MACHINE -->
+        <div class="atm" id="atm">
+          <div class="atm-brand">◆ ROOSTER-ATM ◆</div>
+          <div class="atm-screen" id="atmScreen">
+            <div class="scr-line">WELCOME</div>
+            <div class="scr-main scr-blink" id="scrMsg">INSERT NOTE_</div>
+            <div class="scr-line" id="scrSub">SLOT READY</div>
+          </div>
+          <div class="atm-slot-wrap">
+            <div class="slot-label">INSERT SLOT</div>
+            <div class="atm-slot" id="atmSlot">
+              <div class="slot-glow"></div>
+            </div>
+          </div>
+          <div class="atm-keypad">
+            <div class="key-btn">1</div><div class="key-btn">2</div><div class="key-btn">3</div>
+            <div class="key-btn">4</div><div class="key-btn">5</div><div class="key-btn">6</div>
+            <div class="key-btn">7</div><div class="key-btn">8</div><div class="key-btn">9</div>
+            <div class="key-btn">*</div><div class="key-btn">0</div><div class="key-btn">#</div>
+          </div>
 
-    <a class="donate-btn" href="https://paypal.me/yourusername" target="_blank" rel="noopener">
-      ◈ PAYPAL
-    </a>
+          <!-- Success overlay inside ATM -->
+          <div class="success-overlay" id="successOverlay">
+            <div class="success-title">THANK YOU</div>
+            <div class="success-sub">TRANSFER COMPLETE_</div>
+            <button class="success-reset" id="resetBtn">INSERT ANOTHER</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="instruction" id="instrText">GRAB THE NOTE AND DRAG IT INTO THE ATM SLOT</p>
+
+      <!-- Platform links -->
+      <div class="donate-links">
+        <div style="font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;color:var(--textdim);margin-bottom:.5rem">OR CHOOSE PLATFORM DIRECTLY</div>
+        <a class="d-link" href="https://ko-fi.com/roosternix" target="_blank" rel="noopener">☕ KO-FI</a>
+        <a class="d-link" href="https://github.com/sponsors/roosternix" target="_blank" rel="noopener">★ GITHUB SPONSORS</a>
+        <a class="d-link" href="https://paypal.me/roosternix" target="_blank" rel="noopener">◈ PAYPAL</a>
+      </div>
+    </div>
   </div>
 
-  <div class="content-box">
-    <div class="section-label">OTHER WAYS TO HELP</div>
-    <p class="body-text" style="color: var(--text-dim); font-size: 14px; line-height: 1.9;">
-      ★ Star my repos on GitHub<br>
-      ★ Share my work with others<br>
-      ★ Leave feedback or open issues<br>
-      ★ Follow me on social media
-    </p>
+  <div class="right-panel">
+    <div class="rp-block"><div class="rp-label">NODE</div><div class="rp-val">04 / 04</div></div>
+    <div class="rp-divider"></div>
+    <div class="rp-block"><div class="rp-label">ATM</div><div class="rp-val blink">READY_</div></div>
+    <div class="rp-divider"></div>
+    <div class="rp-block"><div class="rp-label">STATUS</div><div class="rp-val">OPEN</div></div>
   </div>
 
-  <div style="text-align: center; margin-top: 1.5rem;">
-    <p style="font-family: 'VT323', monospace; font-size: 16px; color: var(--amber-dim); letter-spacing: 3px;">
-      THANK YOU, ADVENTURER ♥
-    </p>
+  <div class="bot-bar">
+    <span>04 // DONATE</span>
+    <div class="ticker"><div class="ticker-inner">// RESOURCE TRANSFER MODULE ACTIVE // DRAG NOTE INTO SLOT TO PROCEED // THANK YOU FOR YOUR SUPPORT // ALL PLATFORMS ACCEPTED // ROOSTERNIX APPRECIATES YOU //</div></div>
+    <span>SYS::OK</span>
   </div>
+
 </div>
 
 <script>
-  const starsEl = document.getElementById('stars');
-  for (let i = 0; i < 100; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*3}s;`;
-    starsEl.appendChild(s);
+setInterval(()=>document.getElementById('clk').textContent=new Date().toTimeString().slice(0,8),1000);
+
+const note = document.getElementById('draggableNote');
+const slot = document.getElementById('atmSlot');
+const scrMsg = document.getElementById('scrMsg');
+const scrSub = document.getElementById('scrSub');
+const successOverlay = document.getElementById('successOverlay');
+const resetBtn = document.getElementById('resetBtn');
+const instrText = document.getElementById('instrText');
+
+let dragging=false,offX=0,offY=0,origLeft=0,origTop=0;
+let noteRect,startX,startY;
+
+// Set initial position
+function initNote(){
+  const stack = document.getElementById('noteStack');
+  const sr = stack.getBoundingClientRect();
+  note.style.position='fixed';
+  note.style.left=sr.left+'px';
+  note.style.top=sr.top+'px';
+  note.style.width='155px';
+  note.style.height='72px';
+  note.style.margin='0';
+  origLeft=sr.left;origTop=sr.top;
+}
+window.addEventListener('load',initNote);
+window.addEventListener('resize',()=>{if(!dragging) initNote()});
+
+note.addEventListener('mousedown',e=>{
+  dragging=true;
+  const r=note.getBoundingClientRect();
+  offX=e.clientX-r.left;offY=e.clientY-r.top;
+  note.classList.add('dragging');
+  note.style.transition='none';
+  scrMsg.textContent='DETECTING...';
+  scrSub.textContent='BRING TO SLOT';
+  instrText.textContent='NOW DROP IT INTO THE SLOT';
+  e.preventDefault();
+});
+
+// Touch support
+note.addEventListener('touchstart',e=>{
+  dragging=true;
+  const touch=e.touches[0];
+  const r=note.getBoundingClientRect();
+  offX=touch.clientX-r.left;offY=touch.clientY-r.top;
+  note.classList.add('dragging');
+  note.style.transition='none';
+  e.preventDefault();
+},{passive:false});
+
+document.addEventListener('mousemove',e=>{
+  if(!dragging) return;
+  const x=e.clientX-offX,y=e.clientY-offY;
+  note.style.left=x+'px';note.style.top=y+'px';
+  checkHover(e.clientX,e.clientY);
+});
+
+document.addEventListener('touchmove',e=>{
+  if(!dragging) return;
+  const touch=e.touches[0];
+  const x=touch.clientX-offX,y=touch.clientY-offY;
+  note.style.left=x+'px';note.style.top=y+'px';
+  checkHover(touch.clientX,touch.clientY);
+  e.preventDefault();
+},{passive:false});
+
+function checkHover(cx,cy){
+  const sr=slot.getBoundingClientRect();
+  const over=(cx>sr.left-30&&cx<sr.right+30&&cy>sr.top-40&&cy<sr.bottom+40);
+  slot.classList.toggle('hover',over);
+  if(over){scrMsg.textContent='DETECTED_';scrMsg.style.color='var(--green)'}
+  else{scrMsg.textContent='DETECTING...';scrMsg.style.color=''}
+}
+
+document.addEventListener('mouseup',e=>drop(e.clientX,e.clientY));
+document.addEventListener('touchend',e=>{
+  if(!dragging) return;
+  const touch=e.changedTouches[0];
+  drop(touch.clientX,touch.clientY);
+});
+
+function drop(cx,cy){
+  if(!dragging) return;
+  dragging=false;
+  note.classList.remove('dragging');
+  const sr=slot.getBoundingClientRect();
+  const hit=(cx>sr.left-30&&cx<sr.right+30&&cy>sr.top-40&&cy<sr.bottom+40);
+  if(hit){
+    // Animate into slot
+    const sx=sr.left+sr.width/2-77,sy=sr.top-10;
+    note.style.transition='all 0.3s cubic-bezier(0.4,0,0.2,1)';
+    note.style.left=sx+'px';note.style.top=sy+'px';
+    note.style.transform='scaleY(0.15) scaleX(0.85)';
+    note.style.opacity='0';
+    slot.classList.remove('hover');
+    scrMsg.textContent='PROCESSING...';scrSub.textContent='PLEASE WAIT';
+    instrText.textContent='TRANSFERRING...';
+    setTimeout(()=>{
+      successOverlay.classList.add('show');
+      scrMsg.textContent='ACCEPTED';scrSub.textContent='THANK YOU ♥';
+      instrText.textContent='TRANSACTION COMPLETE';
+      // open platform in new tab
+      window.open('https://ko-fi.com/roosternix','_blank');
+    },700);
+  } else {
+    // Snap back
+    note.style.transition='all 0.4s cubic-bezier(0.34,1.56,0.64,1)';
+    note.style.left=origLeft+'px';note.style.top=origTop+'px';
+    note.style.transform='';note.style.opacity='1';
+    slot.classList.remove('hover');
+    scrMsg.textContent='INSERT NOTE_';scrSub.textContent='SLOT READY';
+    instrText.textContent='GRAB THE NOTE AND DRAG IT INTO THE ATM SLOT';
   }
+}
+
+resetBtn.addEventListener('click',()=>{
+  successOverlay.classList.remove('show');
+  note.style.transition='none';
+  note.style.transform='';note.style.opacity='1';
+  initNote();
+  setTimeout(()=>{note.style.transition=''},50);
+  scrMsg.textContent='INSERT NOTE_';scrSub.textContent='SLOT READY';
+  instrText.textContent='GRAB THE NOTE AND DRAG IT INTO THE ATM SLOT';
+});
 </script>
 </body>
 </html>

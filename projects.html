@@ -1,90 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects — YOUR NAME</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PROJECTS — ROOSTERNIX</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hud.css">
 </head>
 <body>
-<div class="stars" id="stars"></div>
+<div class="grid-bg"></div>
+<div class="hud-screen">
 
-<div class="page">
-  <a class="back-btn" href="index.html">◀ BACK TO MENU</a>
-
-  <div class="page-header">
-    <div class="page-icon">⚗️</div>
-    <div class="page-title-wrap">
-      <span class="page-num">02 / PROJECTS</span>
-      <h1 class="page-title">MY WORK</h1>
+  <div class="top-bar">
+    <a class="back-btn" href="index.html">◀ MENU</a>
+    <span class="top-title">// PROJECTS — DATABASE</span>
+    <div class="top-right">
+      <span class="top-status">● ONLINE</span>
+      <span id="clk">--:--:--</span>
+      <span>roosternix.github.io</span>
     </div>
   </div>
 
-  <!-- PROJECT CARDS — duplicate and edit these for each project -->
-
-  <div class="content-box">
-    <div class="section-label">FEATURED PROJECTS</div>
-
-    <a class="item-row" href="https://github.com/yourusername/project-one" target="_blank" rel="noopener">
-      <span class="item-icon">01</span>
-      <span class="item-label">
-        Project Name One
-        <span class="item-sub">A short description of what this project does</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
-
-    <a class="item-row" href="https://github.com/yourusername/project-two" target="_blank" rel="noopener">
-      <span class="item-icon">02</span>
-      <span class="item-label">
-        Project Name Two
-        <span class="item-sub">Another cool thing you built</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
-
-    <a class="item-row" href="https://github.com/yourusername/project-three" target="_blank" rel="noopener">
-      <span class="item-icon">03</span>
-      <span class="item-label">
-        Project Name Three
-        <span class="item-sub">What makes it interesting or useful</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
-
-    <a class="item-row" href="https://github.com/yourusername/project-four" target="_blank" rel="noopener">
-      <span class="item-icon">04</span>
-      <span class="item-label">
-        Project Name Four
-        <span class="item-sub">Technologies used or problem solved</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
+  <div class="sidebar">
+    <div class="sidebar-label">NAVIGATION</div>
+    <a class="nav-item" href="links.html"><span class="nav-dot"></span>LINKS</a>
+    <a class="nav-item active" href="projects.html"><span class="nav-dot"></span>PROJECTS</a>
+    <a class="nav-item" href="about.html"><span class="nav-dot"></span>ABOUT</a>
+    <a class="nav-item" href="donate.html"><span class="nav-dot"></span>DONATE</a>
+    <div class="sidebar-bottom">SYS STATUS<div class="bar-wrap"><div class="bar-fill"></div></div></div>
   </div>
 
-  <div class="content-box">
-    <div class="section-label">ALL REPOS</div>
-    <a class="item-row" href="https://github.com/yourusername?tab=repositories" target="_blank" rel="noopener">
-      <span class="item-icon">★</span>
-      <span class="item-label">
-        View all on GitHub
-        <span class="item-sub">github.com/yourusername</span>
-      </span>
-      <span class="item-arrow">»</span>
-    </a>
+  <div class="main">
+    <div class="c-section">
+      <div class="c-head">FEATURED PROJECTS</div>
+      <a class="c-row" href="https://github.com/roosternix/project-one" target="_blank" rel="noopener">
+        <span class="c-icon">P.01</span>
+        <span style="flex:1">Project Name One<span class="c-sub">A short description of what this project does</span></span>
+        <span class="c-arr">»</span>
+      </a>
+      <a class="c-row" href="https://github.com/roosternix/project-two" target="_blank" rel="noopener">
+        <span class="c-icon">P.02</span>
+        <span style="flex:1">Project Name Two<span class="c-sub">Another cool thing you built</span></span>
+        <span class="c-arr">»</span>
+      </a>
+      <a class="c-row" href="https://github.com/roosternix/project-three" target="_blank" rel="noopener">
+        <span class="c-icon">P.03</span>
+        <span style="flex:1">Project Name Three<span class="c-sub">What makes it interesting or useful</span></span>
+        <span class="c-arr">»</span>
+      </a>
+      <a class="c-row" href="https://github.com/roosternix/project-four" target="_blank" rel="noopener">
+        <span class="c-icon">P.04</span>
+        <span style="flex:1">Project Name Four<span class="c-sub">Technologies used or problem solved</span></span>
+        <span class="c-arr">»</span>
+      </a>
+    </div>
+    <div class="c-section">
+      <div class="c-head">FULL ARCHIVE</div>
+      <a class="c-row" href="https://github.com/roosternix?tab=repositories" target="_blank" rel="noopener">
+        <span class="c-icon">★</span>
+        <span style="flex:1">All repositories on GitHub<span class="c-sub">github.com/roosternix</span></span>
+        <span class="c-arr">»</span>
+      </a>
+    </div>
   </div>
+
+  <div class="right-panel">
+    <div class="rp-block"><div class="rp-label">NODE</div><div class="rp-val">02 / 04</div></div>
+    <div class="rp-divider"></div>
+    <div class="rp-block"><div class="rp-label">ENTRIES</div><div class="rp-val">04</div></div>
+    <div class="rp-divider"></div>
+    <div class="rp-block"><div class="rp-label">STATUS</div><div class="rp-val blink">LIVE_</div></div>
+  </div>
+
+  <div class="bot-bar">
+    <span>02 // PROJECTS</span>
+    <div class="ticker"><div class="ticker-inner">// PROJECT DATABASE LOADED // 4 ENTRIES FOUND // ROOSTERNIX BUILD SYSTEM ONLINE // GITHUB SYNC ACTIVE // ALL REPOS ACCESSIBLE //</div></div>
+    <span>SYS::OK</span>
+  </div>
+
 </div>
-
-<script>
-  const starsEl = document.getElementById('stars');
-  for (let i = 0; i < 100; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*3}s;`;
-    starsEl.appendChild(s);
-  }
-</script>
+<script>setInterval(()=>document.getElementById('clk').textContent=new Date().toTimeString().slice(0,8),1000)</script>
 </body>
 </html>
